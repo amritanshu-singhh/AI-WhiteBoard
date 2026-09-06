@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AI-Powered Collaborative Whiteboard</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="brand">
+      <span class="logo-dot"></span>
+      <h1>AI Whiteboard</h1>
+    </div>
+    <div class="board-info">
+      <input id="boardName" type="text" value="Untitled Board" />
+      <span id="saveStatus" class="save-status">Not saved</span>
+    </div>
+    <button id="menuToggle" class="icon-btn mobile-only" aria-label="Toggle menu">☰</button>
+  </header>
+
+  <div class="app">
+    <aside id="sidebar" class="sidebar">
+      <div class="panel">
+        <h3>Tools</h3>
+        <div class="tool-row">
+          <button class="tool-btn active" data-tool="pen" title="Pen">✏️ Pen</button>
+          <button class="tool-btn" data-tool="eraser" title="Eraser">🧽 Eraser</button>
+        </div>
+
+        <label class="field-label">Color</label>
+        <input id="colorPicker" type="color" value="#1e1e1e" />
+
+        <label class="field-label">Brush size: <span id="sizeValue">4</span>px</label>
+        <input id="sizeSlider" type="range" min="1" max="40" value="4" />
+
+        <button id="clearBtn" class="full-btn danger">Clear Board</button>
+      </div>
+
+      <div class="panel">
+        <h3>AI Handwriting Recognition</h3>
+        <button id="recognizeBtn" class="full-btn primary">Recognize Handwriting</button>
+        <div id="ocrLoading" class="ocr-loading hidden">Analyzing strokes…</div>
+        <textarea id="recognizedText" placeholder="Recognized text will appear here…" rows="5"></textarea>
+      </div>
+
+      <div class="panel">
+        <h3>Board</h3>
+        <button id="newBoardBtn" class="full-btn">New Board</button>
+        <button id="saveBtn" class="full-btn primary">Save Board</button>
+        <button id="shareBtn" class="full-btn">Copy Share Link</button>
+        <label class="field-label">Saved Boards</label>
+        <select id="boardList" size="4"></select>
+        <button id="loadBtn" class="full-btn">Load Selected</button>
+      </div>
+
+      <div class="panel">
+        <h3>Collaborators</h3>
+        <ul id="presenceList" class="presence-list"></ul>
+      </div>
+    </aside>
+
+    <main class="canvas-wrap">
+      <canvas id="board"></canvas>
+      <div id="cursorLayer" class="cursor-layer"></div>
+    </main>
+  </div>
+
+  <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
